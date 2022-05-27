@@ -310,7 +310,7 @@ app.get("/discord", (_req, res) => {
 
 // Replit
 app.get("/code", (_req, res) => {
-  res.redirect("https://replit.com/@notyusufr/VLCOneKey");
+  res.redirect("https://github.com/VLCCommunity/VLCOneKey");
 });
 
 app.listen(8080, () => {
