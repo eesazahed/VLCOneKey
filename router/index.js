@@ -10,10 +10,10 @@ const router = express.Router();
 router.use(require("./redirects"));
 
 const { statesCollection, studentsCollection } = require("../index");
-const googleClient = new OAuth2Client(process.env["GOOGLE_SECRET"]);
 const {
   OAuth2Client
 } = require("google-auth-library");
+const googleClient = new OAuth2Client(process.env["GOOGLE_SECRET"]);
 const fetch = require("node-fetch");
 
 // index & Discord sign in 
