@@ -8,6 +8,7 @@ const express = require("express");
 const router = express.Router();
 
 router.use(require("./redirects"));
+router.use(require("/api", "./api.v0"));
 
 const { statesCollection, studentsCollection } = require("../index");
 const {
