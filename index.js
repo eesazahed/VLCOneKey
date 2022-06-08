@@ -16,10 +16,6 @@ const {
 
 const express = require("express");
 const bodyParser = require("body-parser");
-const {
-  OAuth2Client
-} = require("google-auth-library");
-const googleClient = new OAuth2Client(process.env["GOOGLE_SECRET"]);
 const fetch = require("node-fetch");
 const exec = require('child_process').exec;
 
