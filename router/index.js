@@ -17,8 +17,7 @@ const googleClient = new OAuth2Client(process.env["GOOGLE_SECRET"]);
 const fetch = require("node-fetch");
 
 // index & Discord sign in 
-router.get("/", (req, res) => {
-  (async() => {
+router.get("/", async (req, res) => {
     let error, verified;
 
     // if discord oauth code
@@ -101,18 +100,16 @@ router.get("/", (req, res) => {
       discordCompleted: verified,
       error: error,
     });
-  })();
 });
 
 // Google Sign In
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   // if missing ID token
   if (!req.body.token) { 
     res.statusCode = 405;
     return res.send("Missing token");
   }
   
-  const verify = async () => {
     // verify legitimacy of ID token
     const ticket = await googleClient.verifyIdToken({
       idToken: req.body.token,
@@ -158,9 +155,6 @@ router.post("/", (req, res) => {
 
     // send discord oauth with state
     res.send(`https://discord.com/oauth2/authorize?client_id=919271957051105311&response_type=code&scope=identify&state=${state}`);
-  }
-
-  verify(); // call async function
 });
 
 module.exports = router;
