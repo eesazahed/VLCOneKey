@@ -12,7 +12,7 @@ const fetch = require("node-fetch");
 router.get("/status", (req, res) => {
   fetch("https://discord.com/api/users/@me", {
     headers: {
-      Authorization: `Bot ${process.env['TOKEN']}`,
+      Authorization: `Bot ${process.env['DISCORD_TOKEN']}`,
     },
   }).then(response => {
     res.sendStatus(response.status);

@@ -36,7 +36,7 @@ router.get("/", async (req, res) => {
           method: "POST",
           body: new URLSearchParams({
             client_id: "919271957051105311",
-            client_secret: process.env["CLIENT_SECRET"],
+            client_secret: process.env["DISCORD_SECRET"],
             grant_type: "authorization_code",
             code: req.query.code,
             redirect_uri: "https://vlconekey.com",
@@ -132,7 +132,7 @@ router.post("/", async (req, res) => {
       // fetch discord user through api
        const response = await fetch(`https://discord.com/api/v9/users/${emailInDB._id}`, {
           headers: {
-            Authorization: `Bot ${process.env['TOKEN']}`,
+            Authorization: `Bot ${process.env['DISCORD_TOKEN']}`,
           },
         }); 
 
