@@ -125,6 +125,7 @@ app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
+app.use(require("./router"));
 
 
 // index & Discord sign in 
@@ -288,30 +289,6 @@ app.get("/discordstatus", (req, res) => {
   });
 });
 
-// VLC OneKey notion
-app.get("/info", (_req, res) => {
-  res.redirect("https://vlccommunity.notion.site/VLC-OneKey-4dc05c574d27492a907865fe1d02502a");
-});
-
-// Uptimerobot status
-app.get("/status", (_req, res) => {
-  res.redirect("https://stats.uptimerobot.com/XVl3Gu41AL");
-});
-
-// Terms & Conditions
-app.get("/terms", (_req, res) => {
-  res.redirect("https://vlccommunity.notion.site/VLC-OneKey-Terms-and-Conditions-53d53468331d4f74bc1f0d358a8810d5");
-});
-
-// VLC OneKey Discord Server
-app.get("/discord", (_req, res) => {
-  res.redirect("https://discord.gg/aGrNsyHPTT");
-});
-
-// Replit
-app.get("/code", (_req, res) => {
-  res.redirect("https://github.com/VLCCommunity/VLCOneKey");
-});
 
 app.listen(8080, () => {
   console.log("✅ OneKey online: https://vlconekey.com");
