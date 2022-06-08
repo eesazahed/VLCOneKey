@@ -7,6 +7,8 @@
 const express = require("express");
 const router = express.Router();
 
+const fetch = require("node-fetch");
+
 router.get("/status", (req, res) => {
   fetch("https://discord.com/api/users/@me", {
     headers: {
