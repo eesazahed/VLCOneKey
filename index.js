@@ -124,20 +124,6 @@ app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
 app.use(require("./router"));
 
-app.get("/discordstatus", (req, res) => {
-  fetch("https://discord.com/api/users/@me", {
-    headers: {
-      Authorization: `Bot ${process.env['TOKEN']}`,
-    },
-  }).then(response => {
-    res.sendStatus(response.status);
-    
-    if (response.status != 200) {
-      exec("kill 1");
-    };
-  });
-});
-
 
 app.listen(8080, () => {
   console.log("✅ OneKey online: https://vlconekey.com");
