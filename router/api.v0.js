@@ -7,7 +7,7 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/discordstatus", (req, res) => {
+router.get("/status", (req, res) => {
   fetch("https://discord.com/api/users/@me", {
     headers: {
       Authorization: `Bot ${process.env['TOKEN']}`,
