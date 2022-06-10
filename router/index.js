@@ -10,7 +10,8 @@ const router = express.Router();
 router.use(require("./redirects"));
 router.use("/api", require("./api.v0"));
 
-const { statesCollection, studentsCollection } = require("../index");
+const { statesCollection, studentsCollection, globals } = require("../index");
+const userVerify = require("../bot/events/userVerify");
 const {
   OAuth2Client
 } = require("google-auth-library");
@@ -48,7 +49,8 @@ router.get("/", async (req, res) => {
 
         // json response
         let data = await response.json();
-        if (!data.access_token) {
+        if (response.status !== 200) {
+          console.log(data);
           error = "Invalid Discord OAuth token";
         } 
         
@@ -81,8 +83,8 @@ router.get("/", async (req, res) => {
               userVerify(data.id, state.name);
               console.log(`🔓 Verified ${data.id} as ${state.name}.`);
             } catch (error) {
-              console.log(`❌ Failed to verify ${data.id} as ${state.name}.`);
-              globals.error(`Failed to verify ${data.id} as ${state.name}.`)
+              console.log(error);
+              globals.error(`❌ Failed to verify ${data.id} as ${state.name}.`);
             }
             verified = true;
             

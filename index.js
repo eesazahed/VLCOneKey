@@ -101,7 +101,6 @@ discordClient.on("interactionCreate", async(interaction) => {
   }
 });
 
-const userVerify = require("./bot/events/userVerify");
 const guildMemberAdd = require("./bot/events/guildMemberAdd");
 const guildMemberUpdate = require("./bot/events/guildMemberUpdate");
 
