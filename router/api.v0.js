@@ -10,6 +10,10 @@ const router = express.Router();
 const fetch = require("node-fetch");
 const { studentsCollection } = require("../index");
 
+router.get("/docs", (req, res) => {
+  res.render("docs");
+});
+
 router.get("/status", (req, res) => {
   fetch("https://discord.com/api/users/@me", {
     headers: {
