@@ -7,7 +7,7 @@
 const { discordClient, studentsCollection, guildsCollection, globals } = require('../../index');
 
 module.exports = async function(discordID, vlcName) {
-  /* When a user verifies through the web interface, this function ise called in index.js, for example:
+  /* When a user verifies through the web interface, this function is called in index.js, for example:
   const userVerify = require('.bot/userVerify');
   userVerify(the Discord user ID, the VLC full name);
 
