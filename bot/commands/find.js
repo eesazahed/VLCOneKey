@@ -14,7 +14,8 @@ module.exports = async function(interaction) {
     $text: {
       $search: interaction.options.data[0].value
     }
-  }).sort({
+  }).limit(5)
+    .sort({
     score: {
       $meta: "textScore"
     }
