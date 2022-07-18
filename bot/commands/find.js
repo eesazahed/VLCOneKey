@@ -14,7 +14,7 @@ module.exports = async function(interaction) {
     $text: {
       $search: interaction.options.data[0].value
     }
-  }).limit(5)
+  }).limit(interaction.options.data[0].value.includes("virtuallearning.ca") ? 2 : 5)
     .sort({
     score: {
       $meta: "textScore"
