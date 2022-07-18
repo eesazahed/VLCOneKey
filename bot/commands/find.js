@@ -21,7 +21,7 @@ module.exports = async function(interaction) {
   })
 
   let fields = [];
-  await query.forEach(async student => {
+  await query.slice(9).forEach(async student => {
     const user = await discordClient.users.fetch(student._id);
 
     fields.push({
