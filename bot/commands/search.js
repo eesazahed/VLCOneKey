@@ -11,15 +11,15 @@ const {
 
 module.exports = async function(interaction) {
   const query = await studentsCollection.find({
-    $text: {
-      $search: interaction.options.data[0].value
-    }
-  }).limit(interaction.options.data[0].value.includes("@virtuallearning.ca") ? 1 : 5)
+      $text: {
+        $search: interaction.options.data[0].value
+      }
+    }).limit(interaction.options.data[0].value.includes("@virtuallearning.ca") ? 1 : 5)
     .sort({
-    score: {
-      $meta: "textScore"
-    }
-  })
+      score: {
+        $meta: "textScore"
+      }
+    })
 
   let fields = [];
   await query.forEach(async student => {
