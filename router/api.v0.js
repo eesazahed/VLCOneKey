@@ -30,9 +30,9 @@ router.get("/status", (req, res) => {
 
 router.get("/search", (req, res) => {
   // TODO VALIDATE API TOKEN
-  if (!req.headers("Authorization")) {
-    res.sendStatus(401);  // Unauthorized
-  };
+  // if (!req.headers("Authorization")) {
+  //   res.sendStatus(401);  // Unauthorized
+  // };
   
   const query = req.body.id || req.body.name;  // Prefer ID over name
   if (!query) {
