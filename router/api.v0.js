@@ -34,9 +34,9 @@ router.get("/search", (req, res) => {
   //   res.sendStatus(401);  // Unauthorized
   // };
   
-  const query = req.body.name;
+  const query = req.body.query;
   if (!query) {
-    res.status(400).send('Missing "id" or "name" field in JSON body.');  // Bad request
+    res.status(400).send('Missing "query" field in JSON body.');  // Bad request
   };
 });
 
