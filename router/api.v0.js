@@ -25,7 +25,7 @@ router.get("/status", async (req, res) => {
 });
 
 router.get("/search", async (req, res) => {
-  const query = req.body.query;
+  const query = req.body.query || req.query.query; // JSON or URL parameter
   if (!query) {
     res.status(400).send({"errors": ['Missing "query" field in JSON body.']});  // Bad request
   };
