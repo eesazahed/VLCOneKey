@@ -41,7 +41,15 @@ router.get("/search", (req, res) => {
 });
 
 router.get("/users/:id", (req, res) => {
-  res.sendStatus(200);
+  const user = await studentsCollection.findOne({
+    _id: data.id
+  });
+  
+  if (!user) {
+    res.status(404).send("User not found!");
+  };
+
+  res.send(user);
 })
 
 module.exports = router;
