@@ -34,10 +34,14 @@ router.get("/search", (req, res) => {
   //   res.sendStatus(401);  // Unauthorized
   // };
   
-  const query = req.body.id || req.body.name;  // Prefer ID over name
+  const query = req.body.name;
   if (!query) {
     res.status(400).send('Missing "id" or "name" field in JSON body.');  // Bad request
   };
 });
+
+router.get("/users/:id", (req, res) => {
+  res.sendStatus(200);
+})
 
 module.exports = router;
