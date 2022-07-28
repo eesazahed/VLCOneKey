@@ -36,7 +36,7 @@ router.get("/search", (req, res) => {
   
   const query = req.body.id || req.body.name;  // Prefer ID over name
   if (!query) {
-    res.sendStatus(400);  // Bad request
+    res.status(400).send('Missing "id" or "name" field in JSON body.');  // Bad request
   };
 });
 
