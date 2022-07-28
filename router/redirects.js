@@ -33,7 +33,7 @@ router.get("/code", (_req, res) => {
 });
 
 router.get("/docs", (_req, res) => {
-  res.redierct("https://vlccommunity.notion.site/VLC-OneKey-API-Documentation-0f42bdf48e00434792a58bbeb9273f2e");
+  res.redirect("https://vlccommunity.notion.site/VLC-OneKey-API-Documentation-0f42bdf48e00434792a58bbeb9273f2e");
 });
 
 module.exports = router;
