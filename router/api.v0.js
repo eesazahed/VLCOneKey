@@ -42,7 +42,7 @@ router.get("/search", (req, res) => {
 
 router.get("/users/:id", (req, res) => {
   const user = await studentsCollection.findOne({
-    _id: data.id
+    _id: req.params.id
   });
   
   if (!user) {
