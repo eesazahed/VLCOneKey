@@ -68,7 +68,7 @@ router.get("/", async (req, res) => {
             _id: data.id
           });
           if (discordInDB) {
-            error = `${data.username}#${data.discriminator} already verified as ${emailInDB.email}!`;
+            error = `${data.username}#${data.discriminator} already verified as ${discordInDB.email}!`;
           } 
           
           else {
