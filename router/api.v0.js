@@ -38,6 +38,20 @@ router.get("/search", (req, res) => {
   if (!query) {
     res.status(400).send('Missing "query" field in JSON body.');  // Bad request
   };
+
+  const result = await studentsCollection.find({
+    $text: {
+      $search: query
+    }
+  })
+  .limit(5)
+  .sort({
+    score: {
+      $meta: "textScore"
+    }
+  });
+
+  res.send(result);
 });
 
 router.get("/users/:id", (req, res) => {
