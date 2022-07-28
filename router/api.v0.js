@@ -30,7 +30,9 @@ router.get("/search", async (req, res) => {
     res.status(400).send({"errors": ['Missing "query" field in JSON body.']});  // Bad request
   };
 
-  const result = await studentsCollection.find({
+  let results = [];
+  
+  await studentsCollection.find({
     $text: {
       $search: query
     }
@@ -40,9 +42,9 @@ router.get("/search", async (req, res) => {
     score: {
       $meta: "textScore"
     }
-  });
+  }).forEach(result => results.push(result)); // someone PLEASE improve this
 
-  res.send(result);
+  res.send(results);
 });
 
 router.get("/users/:id", async (req, res) => {
