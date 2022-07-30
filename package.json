@@ -19,10 +19,12 @@
     "node-fetch": "^2.6.1"
   },
   "scripts": {
-    "start": "node ."
+    "start": "node .",
+    "dev": "DEVELOPMENT=true node ."
   },
   "main": "index.js",
   "devDependencies": {
+    "dotenv": "^16.0.1",
     "node": "^16.13.1"
   },
   "keywords": [],
