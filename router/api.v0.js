@@ -10,7 +10,7 @@ const router = express.Router();
 const fetch = require("node-fetch");
 const { studentsCollection, keyCollection } = require("../index");
 
-router.use((req, res, next) => {
+router.use(async (req, res, next) => {
   const apiKey = req.headers["Authorization"]; // get API key from Authorization header
   if (!apiKey) {  // no API key
     return res.status(401).send({"errors": ["Unauthorized! An API key is required. https://vlconekey.com/discord"]})
