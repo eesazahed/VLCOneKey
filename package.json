@@ -19,7 +19,8 @@
     "node-fetch": "^2.6.1"
   },
   "scripts": {
-    "start": "node ."
+    "start": "node .",
+    "dev": "DEVELOPMENT=true node ."
   },
   "main": "index.js",
   "devDependencies": {

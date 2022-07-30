@@ -4,6 +4,8 @@
  *  The VLC name, logo, and all other branding are property of the Virtual Learning Center.
  *--------------------------------------------------------------------------------------------*/
 
+const DEVELOPMENT_MODE = process.env["DEVELOPMENT"];
+
 // Discord imports
 
 const {
@@ -61,57 +63,62 @@ module.exports = {
   discordClient: discordClient,
   studentsCollection: studentsCollection,
   guildsCollection: guildsCollection,
-  statesCollection: statesCollection
 };
 
 const globals = require('./bot/globals');
 module.exports.globals = globals;
 
 // Discord Event Listeners
-discordClient.on("debug", (e) => {
-  if (e.substr(6, 3) == "429") { // discord ban/ratelimit
-    exec("kill 1");
-  };
-});
-
 discordClient.once("ready", async() => {
   console.log("✅ Connected to Discord.");
 
-  discordClient.user.setActivity({
-    'name': `${await studentsCollection.countDocuments()} verified VLCers!`,
-    'type': 3
+  if (!DEVELOPMENT_MODE) {
+    discordClient.user.setActivity({
+      'name': `${await studentsCollection.countDocuments()} verified VLCers!`,
+      'type': 3
+    });
+  };
+});
+
+if (!DEVELOPMENT_MODE) {
+  discordClient.on("debug", (e) => {
+    if (e.substr(6, 3) == "429") { // discord ban/ratelimit
+      exec("kill 1");
+    };
   });
-});
 
-discordClient.on("interactionCreate", async(interaction) => {
-  if (interaction.isCommand()) {
-    try {
-      let executeCommand = require(`./bot/commands/${interaction.commandName}`);
-      await executeCommand(interaction);
-    } catch (error) {
-      console.log(`❌ Unable to execute ${interaction.commandName} command. \n` + error)
+  discordClient.on("interactionCreate", async(interaction) => {
+    if (interaction.isCommand()) {
+      try {
+        let executeCommand = require(`./bot/commands/${interaction.commandName}`);
+        await executeCommand(interaction);
+      } catch (error) {
+        console.log(`❌ Unable to execute ${interaction.commandName} command. \n` + error)
+      }
+    } else if (interaction.isButton()) {
+      try {
+        let executeButton = require(`./bot/buttons/${interaction.customId}`);
+        await executeButton(interaction);
+      } catch (error) {
+        console.log(`❌ Unable to execute ${interaction.customId} button. \n` + error)
+      }
     }
-  } else if (interaction.isButton()) {
-    try {
-      let executeButton = require(`./bot/buttons/${interaction.customId}`);
-      await executeButton(interaction);
-    } catch (error) {
-      console.log(`❌ Unable to execute ${interaction.customId} button. \n` + error)
-    }
-  }
-});
+  });
 
-const guildMemberAdd = require("./bot/events/guildMemberAdd");
-const guildMemberUpdate = require("./bot/events/guildMemberUpdate");
+  const guildMemberAdd = require("./bot/events/guildMemberAdd");
+  const guildMemberUpdate = require("./bot/events/guildMemberUpdate");
 
-discordClient.on("guildMemberAdd", (member) => {
-  guildMemberAdd(member);
-});
-discordClient.on("guildMemberUpdate", (oldMember, newMember) => {
-  guildMemberUpdate(oldMember, newMember);
-});
+  discordClient.on("guildMemberAdd", (member) => {
+    guildMemberAdd(member);
+  });
+  discordClient.on("guildMemberUpdate", (oldMember, newMember) => {
+    guildMemberUpdate(oldMember, newMember);
+  });
 
-console.log("✅ Activated event listeners for Discord.");
+  console.log("✅ Activated event listeners for Discord.");
+} else {
+  console.log("[!] Ignoring event listeners. (Development Mode)");
+}
 
 // Express
 
@@ -125,5 +132,9 @@ app.use(require("./router"));
 
 
 app.listen(8080, () => {
-  console.log("✅ OneKey online: https://vlconekey.com");
+  if (!DEVELOPMENT_MODE) {
+      console.log("✅ OneKey online: https://vlconekey.com");
+  } else {
+      console.log("✅ Webserver online: http://localhost:8080")
+  };
 });
