@@ -16,7 +16,7 @@ router.use(async (req, res, next) => {
     return res.status(401).send({"errors": ["Unauthorized! An API key is required. https://vlconekey.com/discord"]})
   };
 
-  const keyInDB = await keyCollection.findOne(key: apiKey); // search for API key in keyCollection
+  const keyInDB = await keyCollection.findOne({key: apiKey}); // search for API key in keyCollection
   if (!keyInDB) {  // invalid API key
     return res.status(401).send({"errors": ["Unauthorized."]});
   };
