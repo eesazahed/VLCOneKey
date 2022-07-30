@@ -6,6 +6,10 @@
 
 const DEVELOPMENT_MODE = process.env["DEVELOPMENT"];
 
+if (DEVELOPMENT_MODE) {
+  require("dotenv").config(); // load ENV variables from .env
+}
+
 // Discord imports
 
 const {
@@ -63,6 +67,7 @@ module.exports = {
   discordClient: discordClient,
   studentsCollection: studentsCollection,
   guildsCollection: guildsCollection,
+  statesCollection: statesCollection
 };
 
 const globals = require('./bot/globals');
