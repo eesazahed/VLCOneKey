@@ -11,7 +11,7 @@ const fetch = require("node-fetch");
 const { studentsCollection, keyCollection } = require("../index");
 
 router.use(async (req, res, next) => {
-  const apiKey = req.headers["Authorization"]; // get API key from Authorization header
+  const apiKey = req.header("Authorization"); // get API key from Authorization header
   if (!apiKey) {  // no API key
     return res.status(401).send({"errors": ["Unauthorized! An API key is required. https://vlconekey.com/discord"]})
   };
@@ -21,7 +21,7 @@ router.use(async (req, res, next) => {
     return res.status(401).send({"errors": ["Unauthorized."]});
   };
 
-  console.log(`[API] ${req.method} ${req.url} - ${keyInDB.student.name} ${req.headers["x-forwarded-for"]}`);
+  console.log(`[API] ${req.method} ${req.url} - ${keyInDB.student.name} ${req.header("x-forwarded-for")}`);
 
   next();
 });
