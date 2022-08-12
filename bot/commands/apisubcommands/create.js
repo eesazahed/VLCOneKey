@@ -5,7 +5,6 @@
  *--------------------------------------------------------------------------------------------*/
 
 const { discordClient, studentsCollection, keyCollection, globals } = require('../../../index');
-const findKey = require("./findKey");
 const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
 module.exports = async function(interaction) {
