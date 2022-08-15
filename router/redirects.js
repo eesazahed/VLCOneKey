@@ -9,12 +9,12 @@ const router = express.Router();
 
 // VLC OneKey notion
 router.get("/info", (_req, res) => {
-  res.redirect("https://vlccommunity.notion.site/VLC-OneKey-4dc05c574d27492a907865fe1d02502a");
+  res.redirect("http://docs.vlconekey.com");
 });
 
 // Uptimerobot status
 router.get("/status", (_req, res) => {
-  res.redirect("https://stats.uptimerobot.com/XVl3Gu41AL");
+  res.redirect("https://status.vlconekey.com");
 });
 
 // Terms & Conditions
@@ -32,6 +32,7 @@ router.get("/code", (_req, res) => {
   res.redirect("https://github.com/VLCCommunity/VLCOneKey");
 });
 
+// API Documentation
 router.get("/docs", (_req, res) => {
   res.redirect("https://vlccommunity.notion.site/VLC-OneKey-API-Documentation-0f42bdf48e00434792a58bbeb9273f2e");
 });
