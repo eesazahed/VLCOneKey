@@ -31,7 +31,6 @@ gapi.load("auth2", () => {
         }),
       }).then(response => {
         response.text().then(text => {
-          console.log(response.status)
           if (response.status != 200) {
             raiseError(text);
             googleButton.innerHTML = "VLC Gmail";
