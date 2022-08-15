@@ -160,4 +160,8 @@ router.post("/", async (req, res) => {
     res.send(`https://discord.com/oauth2/authorize?client_id=919271957051105311&response_type=code&scope=identify&state=${state}`);
 });
 
+router.get('*', function(req, res){
+  res.render("404");
+});
+
 module.exports = router;
