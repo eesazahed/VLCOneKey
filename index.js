@@ -39,11 +39,11 @@ const mongoDB = new MongoClient(process.env["MONGO_URI"] + "myFirstDatabase?retr
 // Connect to Mongo
 
 mongoDB.connect((err) => {
-  if (err) {
-      console.log(`❌ Failed to connect to MongoDB.`);
-      console.log(err);
-  }
-  console.log("✅ Connected to MongoDB.");
+  if (!err) {
+    console.log("✅ Connected to MongoDB.");
+  } else {
+    console.log(`❌ Failed to connect to MongoDB. ${err}`);
+  };
 });
 
 // Mongo Collections
