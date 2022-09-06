@@ -28,4 +28,5 @@ module.exports = async function(interaction) {
     }]
   });
   await globals.respond(interaction, true, '', '✅ Verification prompt created.');
+  globals.guild(interaction.guild, 'Verification prompt created.');
 }

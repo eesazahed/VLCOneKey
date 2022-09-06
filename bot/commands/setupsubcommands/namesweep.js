@@ -19,4 +19,6 @@ module.exports = async function(interaction) {
       }
     }
   });
+
+  globals.guild(interaction.guild, 'Server nameswept.');
 }

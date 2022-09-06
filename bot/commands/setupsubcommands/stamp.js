@@ -9,7 +9,7 @@ const { discordClient, studentsCollection, guildsCollection, globals } = require
 module.exports = async function(interaction) {
   if (interaction.user.id != globals.yusufID) return globals.respond(interaction, false, '❌ Unauthorized', 'You must be an authorized OneKey developer to use this subcommand.');
   
-  await interaction.channel.send({
+  let stamp = await interaction.channel.send({
     embeds: [{
       'description': '🔒 This server is secured with [VLC OneKey](https://vlconekey.com/info).',
       'footer': {
@@ -19,5 +19,6 @@ module.exports = async function(interaction) {
       'color': 2201331
     }]
   });
-  globals.respond(interaction, true, '', '✅ Stamp created.');
+  globals.respond(interaction, true, '', `✅ Stamp created at ${stamp.url}.`);
+  globals.guild(interaction.guild, `Stamp created at ${stamp.url}.`);
 }

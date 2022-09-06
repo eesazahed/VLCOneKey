@@ -28,4 +28,5 @@ module.exports = async function(interaction) {
     }); 
   }
   globals.respond(interaction, true, '', '✅ Successfully initialized server.')
+  globals.guild(interaction.guild, 'VLC OneKey initialized.');
 }

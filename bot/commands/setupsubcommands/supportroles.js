@@ -24,6 +24,7 @@ module.exports = async function(interaction) {
       ibrahimMember.roles.add(oneKeyRole);
     }
     globals.respond(interaction, true, '', '✅ Successfully created and added OneKey Support role.');
+    globals.guild(interaction.guild, 'Support roles created.');
   } else if (interaction.options.getString('action') == 'repair') {
     let oneKeyRole = interaction.guild.roles.cache.find(role => role.name === "OneKey Support");
     oneKeyRole.edit({
@@ -42,9 +43,11 @@ module.exports = async function(interaction) {
       ibrahimMember.roles.add(oneKeyRole);
     }
     globals.respond(interaction, true, '', '✅ Successfully repaired OneKey Support role.');
+    globals.guild(interaction.guild, 'Support roles repaired.');
   } else if (interaction.options.getString('action') == 'delete') {
     let oneKeyRole = interaction.guild.roles.cache.find(role => role.name === "OneKey Support");
     oneKeyRole.delete();
     globals.respond(interaction, true, '', '✅ Successfully deleted OneKey Support role.');
+    globals.guild(interaction.guild, 'Support roles deleted.');
   }
 }
