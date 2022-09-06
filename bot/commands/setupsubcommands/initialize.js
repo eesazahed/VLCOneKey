@@ -8,22 +8,22 @@ const { discordClient, studentsCollection, guildsCollection, globals } = require
 
 module.exports = async function(interaction) {
   let mongoGuild = await guildsCollection.findOne({ _id: interaction.guild.id });
-  let secondaryRole = null;
-  if (interaction.options.get('secondaryrole')) { secondaryRole = interaction.options.get('secondaryrole').role; }
   
   if (!mongoGuild) {
     guildsCollection.insertOne({
       _id: interaction.guild.id,
       name: interaction.guild.name,
       verifiedRole: interaction.options.get('verifiedrole').role.id,
-      secondaryRole: secondaryRole.id
+      clubName: interaction.options.getString('clubname'),
+      enrollmentLink: interaction.options.getString('enrollmentlink')
     });
   } else {
     guildsCollection.updateOne({ _id: interaction.guild.id }, {
       $set: {
         name: interaction.guild.name,
         verifiedRole: interaction.options.get('verifiedrole').role.id,
-        secondaryRole: secondaryRole.id
+        clubName: interaction.options.getString('clubname'),
+        enrollmentLink: interaction.options.getString('enrollmentlink')
       }
     }); 
   }
