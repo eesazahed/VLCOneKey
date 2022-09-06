@@ -8,7 +8,7 @@ let googleUser = {};
 
 gapi.load("auth2", () => {
   auth2 = gapi.auth2.init({
-    client_id: process.env["GOOGLE_SECRET"],
+    client_id: "357023733055-erbupt35eotgggefrj7hchlipd6ft8ao.apps.googleusercontent.com",
     cookiepolicy: "single_host_origin",
   });
 
