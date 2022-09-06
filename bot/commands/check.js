@@ -22,6 +22,10 @@ module.exports = async function(interaction) {
                 'value': mongoStudent.name,
                 'inline': true
               }, {
+                'name': 'Email',
+                'value': mongoStudent.email,
+                'inline': true
+              }, {
                 'name': 'Date Verified',
                 'value': `<t:${Math.round(mongoStudent.timestamp / 1000)}:R>`,
                 'inline': true
@@ -47,6 +51,10 @@ module.exports = async function(interaction) {
                 {
                   'name': 'Name',
                   'value': otherMongoStudent.name,
+                  'inline': true
+                }, {
+                  'name': 'Email',
+                  'value': otherMongoStudent.email,
                   'inline': true
                 }, {
                   'name': 'Date Verified',

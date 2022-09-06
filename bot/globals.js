@@ -82,6 +82,25 @@ const error = async function(description) {
   });
 }
 
+const guild = async function (guild, description) {
+  let channel = await discordClient.channels.fetch(guildLogsChannelID);
+
+  channel.send({
+    embeds: [{
+      'author': {
+        'name': guild.name,
+        'iconURL': guild.iconURL()
+      },
+      'description': description,
+      'footer': {
+        'iconURL': discordClient.user.displayAvatarURL(),
+        'text': 'VLC OneKey | Verified once, verified forever.'
+      },
+      'color': 2201331
+    }]
+  });
+}
+
 module.exports = {
   verifyLogsChannelID: verifyLogsChannelID,
   errorLogsChannelID: errorLogsChannelID,
@@ -92,5 +111,6 @@ module.exports = {
   respond: respond,
   respondAgain: respondAgain,
   warn: warn,
-  error: error
+  error: error,
+  guild: guild
 }
