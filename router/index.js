@@ -102,6 +102,7 @@ router.get("/", async (req, res) => {
     res.render("index", {
       discordCompleted: verified,
       error: error,
+      googleSecret: process.env["GOOGLE_SECRET"]
     });
 });
 
