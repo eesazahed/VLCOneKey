@@ -1,12 +1,12 @@
-### Name:
+### Name: 
 
-### GitHub username:
+### GitHub username: 
 
 <hr>
 
-### How am I contributing?
+### How am I contributing? 
 
-### Description of contribution:
+### Description of contribution: 
 
 <!-- Remove the 'x' if you are not a student at VLC. -->
 
