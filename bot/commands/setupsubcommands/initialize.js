@@ -7,6 +7,8 @@
 const { discordClient, studentsCollection, guildsCollection, globals } = require('../../../index');
 
 module.exports = async function(interaction) {
+  if (interaction.options.get('verifiedrole').role.position >= interaction.guild.me.roles.highest.position) return globals.respond(interaction, false, ':x: Invalid Role', 'VLC OneKey\'s highest role is below the verified role you have selected. Please move the `VLC OneKey` role to the top of the roles list in server settings.');
+  
   let mongoGuild = await guildsCollection.findOne({ _id: interaction.guild.id });
   
   if (!mongoGuild) {

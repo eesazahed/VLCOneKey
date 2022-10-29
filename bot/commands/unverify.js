@@ -24,12 +24,6 @@ module.exports = async function(interaction) {
       
       if (guild.members.cache.has(mongoStudent._id)) {
         let member = await guild.members.fetch(mongoStudent._id);
-
-        try {
-          await member.setNickname('❌ Inactive Account', '❌ Unverified with VLC OneKey.');
-        } catch {
-          // Cannot set nickname
-        }
         
         let mongoGuild = await guildsCollection.findOne({ '_id': guild.id });
         if (!mongoGuild) return globals.warn(`Guild settings not configured for **${guild.name}**.`);
@@ -39,6 +33,13 @@ module.exports = async function(interaction) {
           await member.roles.remove(verifiedRole, '❌ Unverified with VLC OneKey.');
         } catch (error) {
           globals.error(`Unable to remove verified role from <@${mongoStudent._id}> (\`${mongoStudent._id}\`) in **${guild.name}**.\n\`\`\`\n${error}\n\`\`\``);
+        }
+
+        try {
+          await member.setNickname('❌ Inactive Account', '❌ Unverified with VLC OneKey.');
+          await member.kick('❌ Unverified with VLC OneKey.');
+        } catch {
+          // Cannot set nickname/kick
         }
       }
     });
