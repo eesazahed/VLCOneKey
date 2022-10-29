@@ -8,7 +8,7 @@ const { studentsCollection, keyCollection, globals } = require('../../../index')
 
 module.exports = async function(interaction) {
   const request = await keyCollection.deleteOne({
-    developer: {_id: interaction.options.data[0].user.id}
+    student: {_id: interaction.options.data[0].user.id}
   });
 
   if ((!request.deletedCount) && request.acknowledged) {
