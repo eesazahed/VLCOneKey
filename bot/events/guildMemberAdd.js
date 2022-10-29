@@ -45,8 +45,35 @@ module.exports = async function (member) {
           'text': 'VLC OneKey | Verified once, verified forever.'
       },
       'color': 2201331
-    }]})
+    }]});
   } catch {
     // Cannot send DM notification
+  }
+
+  // ======== Sends DM notice about club enrollement for club servers ========
+
+  if (!mongoGuild.clubName && !mongoGuild.enrollmentLink) return;
+  try {
+    member.send({ 
+      embeds: [{
+        'title': 'Club Enrollment',
+        'description': `Please enroll in the club's Canvas course if you have not already done so.`,
+        'footer': {
+          'iconURL': discordClient.user.displayAvatarURL(),
+          'text': 'VLC OneKey | Verified once, verified forever.'
+        },
+        'color': 2201331
+      }], 'components': [{
+        'type': 1,
+        'components': [{
+          'type': 2,
+          'label': 'Enroll',
+          'style': 5,
+          'url': mongoGuild.enrollmentLink
+        }]
+      }]
+    });
+  } catch {
+    // Cannot send DM notice
   }
 }
