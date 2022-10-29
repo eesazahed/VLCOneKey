@@ -12,7 +12,7 @@ const guildLogsChannelID = '953539282591682560';
 const commLogsChannelID = '884681312445812746';
 
 const yusufID = '218065068875579393'; // Yusuf Rahmn
-const ibrahimID = '905983188973785098'; // Ibrahim Siddique
+const ibrahimID = '760542510975156285'; // Ibrahim Siddique
 
 const developers = [yusufID, ibrahimID];
 
