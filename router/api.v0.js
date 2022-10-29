@@ -10,6 +10,20 @@ const router = express.Router();
 const fetch = require("node-fetch");
 const { studentsCollection, keyCollection } = require("../index");
 
+router.get("/status", async (req, res) => {
+  const response = await fetch("https://discord.com/api/users/@me", {
+    headers: {
+      Authorization: `Bot ${process.env['DISCORD_TOKEN']}`,
+    },
+  });
+
+  res.sendStatus(response.status);
+
+  if (response.status != 200) {
+    exec("kill 1");  // restart repl
+  };
+});
+
 router.use(async (req, res, next) => {
   const apiKey = req.header("Authorization"); // get API key from Authorization header
   if (!apiKey) {  // no API key
@@ -24,21 +38,6 @@ router.use(async (req, res, next) => {
   console.log(`[API] ${req.method} ${req.url} - ${keyInDB.student.name} ${req.header("x-forwarded-for")}`);
 
   next();
-});
-
-
-router.get("/status", async (req, res) => {
-  const response = await fetch("https://discord.com/api/users/@me", {
-    headers: {
-      Authorization: `Bot ${process.env['DISCORD_TOKEN']}`,
-    },
-  });
-
-  res.sendStatus(response.status);
-
-  if (response.status != 200) {
-    exec("kill 1");  // restart repl
-  };
 });
 
 router.get("/search", async (req, res) => {
