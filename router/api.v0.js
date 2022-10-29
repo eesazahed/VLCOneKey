@@ -8,7 +8,24 @@ const express = require("express");
 const router = express.Router();
 
 const fetch = require("node-fetch");
-const { studentsCollection } = require("../index");
+const { studentsCollection, keyCollection } = require("../index");
+
+router.use(async (req, res, next) => {
+  const apiKey = req.header("Authorization"); // get API key from Authorization header
+  if (!apiKey) {  // no API key
+    return res.status(401).send({"errors": ["Unauthorized! An API key is required. https://vlconekey.com/discord"]})
+  };
+
+  const keyInDB = await keyCollection.findOne({key: apiKey}); // search for API key in keyCollection
+  if (!keyInDB) {  // invalid API key
+    return res.status(401).send({"errors": ["Unauthorized."]});
+  };
+
+  console.log(`[API] ${req.method} ${req.url} - ${keyInDB.student.name} ${req.header("x-forwarded-for")}`);
+
+  next();
+});
+
 
 router.get("/status", async (req, res) => {
   const response = await fetch("https://discord.com/api/users/@me", {

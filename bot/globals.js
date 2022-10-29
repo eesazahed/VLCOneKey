@@ -14,6 +14,8 @@ const commLogsChannelID = '884681312445812746';
 const yusufID = '218065068875579393'; // Yusuf Rahmn
 const ibrahimID = '905983188973785098'; // Ibrahim Siddique
 
+const developers = [yusufID, ibrahimID];
+
 const respond = async function(interaction, success, title, description = '') {
   let color = 15548997;
   if (success) { color = 5763719 }
@@ -108,6 +110,7 @@ module.exports = {
   commLogsChannelID: commLogsChannelID,
   yusufID: yusufID,
   ibrahimID: ibrahimID,
+  developers: developers,
   respond: respond,
   respondAgain: respondAgain,
   warn: warn,

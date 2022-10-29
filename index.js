@@ -53,6 +53,9 @@ const studentsCollection = studentsDB.collection("Students");
 const guildsCollection = studentsDB.collection("Guilds");
 const statesCollection = studentsDB.collection("States");
 
+const developerDB = mongoDB.db("DeveloperDB");
+const keyCollection = developerDB.collection("Api_Keys");
+
 // Discord
 
 const discordClient = new Client({
@@ -67,7 +70,8 @@ module.exports = {
   discordClient: discordClient,
   studentsCollection: studentsCollection,
   guildsCollection: guildsCollection,
-  statesCollection: statesCollection
+  statesCollection: statesCollection,
+  keyCollection: keyCollection
 };
 
 const globals = require('./bot/globals');
