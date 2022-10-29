@@ -20,7 +20,7 @@ const commands = [{
             "name": "delete",
             "description": "Delete a student's API key",
             "options": [{
-                "type": 3,
+                "type": 6,
                 "name": "student",
                 "description": "Student must previously have an API key.",
                 "required": true
