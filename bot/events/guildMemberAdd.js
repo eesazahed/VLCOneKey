@@ -34,4 +34,19 @@ module.exports = async function (member) {
   } catch (error) {
     globals.error(`Unable to add verified role to <@${member.user.id}> (\`${member.user.id}\`) in **${member.guild.name}**.\n\`\`\`\n${error}\n\`\`\``);
   }
+  
+  // ======== Sends DM notification ========
+
+  try {
+    member.send({ embeds: [{
+      'description': `You have been automatically verified in **${member.guild.name}**.`,
+      'footer': {
+          'iconURL': discordClient.user.displayAvatarURL(),
+          'text': 'VLC OneKey | Verified once, verified forever.'
+      },
+      'color': 2201331
+    }]})
+  } catch {
+    // Cannot send DM notification
+  }
 }
