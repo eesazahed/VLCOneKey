@@ -101,24 +101,24 @@ discordClient.on("interactionCreate", async(interaction) => {
       console.log(`❌ Unable to execute ${interaction.customId} button. \n` + error)
     }
   }
+});
+  
+const guildMemberAdd = require("./bot/events/guildMemberAdd");
+const guildMemberUpdate = require("./bot/events/guildMemberUpdate");
+const guildCreate = require("./bot/events/guildCreate");
+const guildDelete = require("./bot/events/guildDelete");
 
-  const guildMemberAdd = require("./bot/events/guildMemberAdd");
-  const guildMemberUpdate = require("./bot/events/guildMemberUpdate");
-  const guildCreate = require("./bot/events/guildCreate");
-  const guildDelete = require("./bot/events/guildDelete");
-
-  discordClient.on("guildMemberAdd", (member) => {
-    guildMemberAdd(member);
-  });
-  discordClient.on("guildMemberUpdate", (oldMember, newMember) => {
-    guildMemberUpdate(oldMember, newMember);
-  });
-  discordClient.on("guildCreate", (guild) => {
-    guildCreate(guild);
-  });
-  discordClient.on("guildDelete", (guild) => {
-    guildDelete(guild);
-  });
+discordClient.on("guildMemberAdd", (member) => {
+  guildMemberAdd(member);
+});
+discordClient.on("guildMemberUpdate", (oldMember, newMember) => {
+  guildMemberUpdate(oldMember, newMember);
+});
+discordClient.on("guildCreate", (guild) => {
+  guildCreate(guild);
+});
+discordClient.on("guildDelete", (guild) => {
+  guildDelete(guild);
 });
 
 console.log("✅ Activated event listeners for Discord.");
