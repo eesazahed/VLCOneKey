@@ -1,16 +1,13 @@
 {
   "name": "vlc-onekey",
   "version": "1.0.0",
-  "private": true,
   "contributors": [
     "Yusuf Rahman @notyusufr",
-    "Ibrahim Siddique @TheRedstoneRadiant"
+    "@TheRedstoneRadiant"
   ],
   "dependencies": {
     "@discordjs/rest": "^0.2.0-canary.0",
     "body-parser": "^1.20.1",
-    "bot": "0.0.3",
-    "discord-api-types": "^0.26.1",
     "discord.js": "^13.12.0",
     "ejs": "^3.1.6",
     "express": "^4.18.2",
@@ -20,15 +17,11 @@
   },
   "scripts": {
     "start": "node .",
-    "dev": "DEVELOPMENT=true node ."
+    "dev": "env $(cat .env) node .",
+    "register": "env $(cat .env) node bot/registerCommands.js"
   },
   "main": "index.js",
   "devDependencies": {
-    "dotenv": "^16.0.3",
     "node": "^16.18.0"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "UNLICENSED",
-  "description": ""
+  }
 }

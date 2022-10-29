@@ -4,12 +4,6 @@
  *  The VLC name, logo, and all other branding are property of the Virtual Learning Center.
  *--------------------------------------------------------------------------------------------*/
 
-const DEVELOPMENT_MODE = process.env["DEVELOPMENT"];
-
-if (DEVELOPMENT_MODE) {
-  require("dotenv").config(); // load ENV variables from .env
-}
-
 // Discord imports
 
 const {
@@ -22,8 +16,6 @@ const {
 
 const express = require("express");
 const bodyParser = require("body-parser");
-const fetch = require("node-fetch");
-const exec = require('child_process').exec;
 
 // Database Credentials
 
@@ -67,11 +59,11 @@ discordClient.login(process.env["TOKEN"]);
 // EXPORTS
 
 module.exports = {
-  discordClient: discordClient,
-  studentsCollection: studentsCollection,
-  guildsCollection: guildsCollection,
-  statesCollection: statesCollection,
-  keyCollection: keyCollection
+  discordClient,
+  studentsCollection,
+  guildsCollection,
+  statesCollection,
+  keyCollection
 };
 
 const globals = require('./bot/globals');
@@ -81,38 +73,34 @@ module.exports.globals = globals;
 discordClient.once("ready", async() => {
   console.log("✅ Connected to Discord.");
 
-  if (!DEVELOPMENT_MODE) {
-    discordClient.user.setActivity({
-      'name': `${await studentsCollection.countDocuments()} verified VLCers!`,
-      'type': 3
-    });
+  discordClient.user.setActivity({
+    'name': `${await studentsCollection.countDocuments()} verified VLCers!`,
+    'type': 3
+  });
+});
+
+discordClient.on("debug", (e) => {
+  if (e.substr(6, 3) == "429") { // discord ban/ratelimit
+    require('child_process').exec("kill 1");
   };
 });
 
-if (!DEVELOPMENT_MODE) {
-  discordClient.on("debug", (e) => {
-    if (e.substr(6, 3) == "429") { // discord ban/ratelimit
-      exec("kill 1");
-    };
-  });
-
-  discordClient.on("interactionCreate", async(interaction) => {
-    if (interaction.isCommand()) {
-      try {
-        let executeCommand = require(`./bot/commands/${interaction.commandName}`);
-        await executeCommand(interaction);
-      } catch (error) {
-        console.log(`❌ Unable to execute ${interaction.commandName} command. \n` + error)
-      }
-    } else if (interaction.isButton()) {
-      try {
-        let executeButton = require(`./bot/buttons/${interaction.customId}`);
-        await executeButton(interaction);
-      } catch (error) {
-        console.log(`❌ Unable to execute ${interaction.customId} button. \n` + error)
-      }
+discordClient.on("interactionCreate", async(interaction) => {
+  if (interaction.isCommand()) {
+    try {
+      let executeCommand = require(`./bot/commands/${interaction.commandName}`);
+      await executeCommand(interaction);
+    } catch (error) {
+      console.log(`❌ Unable to execute ${interaction.commandName} command. \n` + error)
     }
-  });
+  } else if (interaction.isButton()) {
+    try {
+      let executeButton = require(`./bot/buttons/${interaction.customId}`);
+      await executeButton(interaction);
+    } catch (error) {
+      console.log(`❌ Unable to execute ${interaction.customId} button. \n` + error)
+    }
+  }
 
   const guildMemberAdd = require("./bot/events/guildMemberAdd");
   const guildMemberUpdate = require("./bot/events/guildMemberUpdate");
@@ -133,9 +121,7 @@ if (!DEVELOPMENT_MODE) {
   });
 
   console.log("✅ Activated event listeners for Discord.");
-} else {
-  console.log("[!] Ignoring event listeners. (Development Mode)");
-}
+});
 
 // Express
 
@@ -148,9 +134,5 @@ app.use(require("./router"));
 
 
 app.listen(8080, () => {
-  if (!DEVELOPMENT_MODE) {
-      console.log("✅ OneKey online: https://vlconekey.com");
-  } else {
-      console.log("✅ Webserver online: http://localhost:8080")
-  };
+  console.log("✅ OneKey online: https://vlconekey.com");
 });
