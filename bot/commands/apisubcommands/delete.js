@@ -8,11 +8,11 @@ const { studentsCollection, keyCollection, globals } = require('../../../index')
 
 module.exports = async function(interaction) {
   const request = await keyCollection.deleteOne({
-    student: {_id: interaction.options.data[0].user.id}
+    student: {_id: interaction.options.data[0].options[0].user.id}
   });
 
   if ((!request.deletedCount) && request.acknowledged) {
-      await globals.respond(interaction, false, '', `❌ ${interaction.options.data[0].user.tag} does not have an API key!`);
+      await globals.respond(interaction, false, '', `❌ ${interaction.options.data[0].options[0].user.tag} does not have an API key!`);
   } 
   
   else if (!request.acknowledged) {
