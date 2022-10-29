@@ -119,9 +119,9 @@ discordClient.on("interactionCreate", async(interaction) => {
   discordClient.on("guildDelete", (guild) => {
     guildDelete(guild);
   });
-
-  console.log("✅ Activated event listeners for Discord.");
 });
+
+console.log("✅ Activated event listeners for Discord.");
 
 // Express
 
