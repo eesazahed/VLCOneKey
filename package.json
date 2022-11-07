@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "contributors": [
     "Yusuf Rahman @notyusufr",
-    "@TheRedstoneRadiant"
+    "@TheRedstoneRadiant",
+    "Eesa Zahed @eesazahed"
   ],
   "dependencies": {
     "@discordjs/rest": "^0.2.0-canary.0",

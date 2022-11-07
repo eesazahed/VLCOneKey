@@ -1,6 +1,6 @@
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) VLC Community. All rights reserved.
- *  VLC Community is student-run and not school-sanctioned, and is not in any way affiliated with or endorsed by the VLC. 
+ *  VLC Community is student-run and not school-sanctioned, and is not in any way affiliated with or endorsed by the VLC.
  *  The VLC name, logo, and all other branding are property of the Virtual Learning Center.
  *--------------------------------------------------------------------------------------------*/
 
@@ -15,11 +15,11 @@ gapi.load("auth2", () => {
   auth2.attachClickHandler(
     document.getElementById("google-button"),
     {},
-    googleUser => {
+    (googleUser) => {
       const id_token = googleUser.getAuthResponse().id_token;
       const googleButton = document.getElementById("google-button");
       googleButton.innerHTML = "↻ Verifying...";
-      
+
       fetch(window.location.href, {
         method: "POST",
         headers: {
@@ -28,8 +28,8 @@ gapi.load("auth2", () => {
         body: JSON.stringify({
           token: id_token,
         }),
-      }).then(response => {
-        response.text().then(text => {
+      }).then((response) => {
+        response.text().then((text) => {
           if (response.status != 200) {
             raiseError(text);
             googleButton.innerHTML = "VLC Gmail";
