@@ -9,10 +9,10 @@ const {
   studentsCollection,
   guildsCollection,
   globals,
-} = require("../../../index");
+} = require('../../../index');
 
 module.exports = async function (interaction) {
-  globals.respond(interaction, true, "", "✅ Checking all members...");
+  globals.respond(interaction, true, '', '✅ Checking all members...');
 
   let mongoGuild = await guildsCollection.findOne({
     _id: interaction.guild.id,
@@ -33,7 +33,7 @@ module.exports = async function (interaction) {
       try {
         await member.setNickname(
           mongoStudent.name,
-          "✅ Verified with VLC OneKey."
+          '✅ Verified with VLC OneKey.'
         );
       } catch {
         // Can't change nickname

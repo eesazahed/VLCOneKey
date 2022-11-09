@@ -4,7 +4,7 @@
  *  The VLC name, logo, and all other branding are property of the Virtual Learning Center.
  *--------------------------------------------------------------------------------------------*/
 
-const { discordClient, globals } = require("../../index");
+const { discordClient, globals } = require('../../index');
 
 module.exports = async function (interaction) {
   if (globals.developers.includes(interaction.user.id)) {
@@ -22,8 +22,8 @@ module.exports = async function (interaction) {
     await globals.respond(
       interaction,
       false,
-      "❌ Unauthorized",
-      "You must be an authorized OneKey developer to use this command."
+      '❌ Unauthorized',
+      'You must be an authorized OneKey developer to use this command.'
     );
   }
 };

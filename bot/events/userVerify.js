@@ -9,7 +9,7 @@ const {
   studentsCollection,
   guildsCollection,
   globals,
-} = require("../../index");
+} = require('../../index');
 
 module.exports = async function (discordID, vlcName) {
   /* When a user verifies through the web interface, this function is called in index.js, for example:
@@ -32,11 +32,11 @@ module.exports = async function (discordID, vlcName) {
     await user.send({
       embeds: [
         {
-          title: "✅ Verified",
+          title: '✅ Verified',
           description: `You have been successfully verified as **${vlcName}**.`,
           footer: {
             iconURL: discordClient.user.displayAvatarURL(),
-            text: "VLC OneKey | Verified once, verified forever.",
+            text: 'VLC OneKey | Verified once, verified forever.',
           },
           color: 2201331,
         },
@@ -53,7 +53,7 @@ module.exports = async function (discordID, vlcName) {
       let member = await guild.members.fetch(discordID);
 
       try {
-        await member.setNickname(vlcName, "✅ Verified with VLC OneKey.");
+        await member.setNickname(vlcName, '✅ Verified with VLC OneKey.');
       } catch {
         // Cannot set nickname
       }
@@ -68,7 +68,7 @@ module.exports = async function (discordID, vlcName) {
         let verifiedRole = await member.guild.roles.fetch(
           mongoGuild.verifiedRole
         );
-        await member.roles.add(verifiedRole, "✅ Verified with VLC OneKey.");
+        await member.roles.add(verifiedRole, '✅ Verified with VLC OneKey.');
       } catch (error) {
         globals.error(
           `Unable to add verified role to <@${discordID}> (\`${discordID}\`) in **${guild.name}**.\n\`\`\`\n${error}\n\`\`\``
@@ -82,11 +82,11 @@ module.exports = async function (discordID, vlcName) {
   verifyLogsChannel.send({
     embeds: [
       {
-        title: "✅ Verification",
+        title: '✅ Verification',
         description: `<@${discordID}> (\`${discordID}\`) has successfully verified as **${vlcName}**.`,
         footer: {
           iconURL: discordClient.user.displayAvatarURL(),
-          text: "VLC OneKey | Verified once, verified forever.",
+          text: 'VLC OneKey | Verified once, verified forever.',
         },
         color: 5763719,
       },

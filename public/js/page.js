@@ -6,24 +6,24 @@
 
 let googleUser = {};
 
-gapi.load("auth2", () => {
+gapi.load('auth2', () => {
   auth2 = gapi.auth2.init({
     client_id: googleSecret,
-    cookiepolicy: "single_host_origin",
+    cookiepolicy: 'single_host_origin',
   });
 
   auth2.attachClickHandler(
-    document.getElementById("google-button"),
+    document.getElementById('google-button'),
     {},
     (googleUser) => {
       const id_token = googleUser.getAuthResponse().id_token;
-      const googleButton = document.getElementById("google-button");
-      googleButton.innerHTML = "↻ Verifying...";
+      const googleButton = document.getElementById('google-button');
+      googleButton.innerHTML = '↻ Verifying...';
 
       fetch(window.location.href, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           token: id_token,
@@ -32,21 +32,21 @@ gapi.load("auth2", () => {
         response.text().then((text) => {
           if (response.status != 200) {
             raiseError(text);
-            googleButton.innerHTML = "VLC Gmail";
+            googleButton.innerHTML = 'VLC Gmail';
           } else {
-            googleButton.classList.remove("w3-black");
-            googleButton.classList.add("w3-green");
-            googleButton.innerHTML = "✅ VLC Gmail";
+            googleButton.classList.remove('w3-black');
+            googleButton.classList.add('w3-green');
+            googleButton.innerHTML = '✅ VLC Gmail';
 
-            const discordButton = document.getElementById("discord-button");
+            const discordButton = document.getElementById('discord-button');
             discordButton.disabled = false;
-            discordButton.classList.remove("w3-disabled");
+            discordButton.classList.remove('w3-disabled');
             discordButton.setAttribute(
-              "onclick",
+              'onclick',
               `window.location.href = "${text}"`
             );
 
-            document.getElementById("error-card").classList.add("w3-hide");
+            document.getElementById('error-card').classList.add('w3-hide');
           }
         });
       });
@@ -55,15 +55,15 @@ gapi.load("auth2", () => {
 });
 
 const raiseError = (err) => {
-  document.getElementById("error-box").innerHTML = `ERROR: ${err}`;
-  document.getElementById("error-card").classList.remove("w3-hide");
+  document.getElementById('error-box').innerHTML = `ERROR: ${err}`;
+  document.getElementById('error-card').classList.remove('w3-hide');
 };
 
 if (discordCompleted) {
-  const card = document.getElementById("card");
-  card.classList.add("w3-padding-64", "w3-green", "w3-center");
-  card.classList.remove("w3-blue");
-  card.innerHTML = "<h1>✅ Verified.</h1>";
+  const card = document.getElementById('card');
+  card.classList.add('w3-padding-64', 'w3-green', 'w3-center');
+  card.classList.remove('w3-blue');
+  card.innerHTML = '<h1>✅ Verified.</h1>';
 }
 
 if (error) {

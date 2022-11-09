@@ -9,7 +9,7 @@ const {
   studentsCollection,
   guildsCollection,
   globals,
-} = require("../../index");
+} = require('../../index');
 
 module.exports = async function (oldMember, newMember) {
   let guild = newMember.guild;

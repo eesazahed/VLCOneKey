@@ -8,7 +8,7 @@ const {
   studentsCollection,
   keyCollection,
   globals,
-} = require("../../../index");
+} = require('../../../index');
 
 module.exports = async function (interaction) {
   const student = await studentsCollection.findOne({
@@ -21,22 +21,22 @@ module.exports = async function (interaction) {
     await globals.respond(
       interaction,
       false,
-      "",
+      '',
       `❌ ${interaction.options.data[0].options[0].user.tag} does not have an API key!`
     );
   } else if (!request.acknowledged) {
     await globals.respond(
       interaction,
       false,
-      "",
-      "❌ Failed to delete API key."
+      '',
+      '❌ Failed to delete API key.'
     );
   } else {
     await globals.respond(
       interaction,
       true,
-      "",
-      "✅ Successfully deleted API Key."
+      '',
+      '✅ Successfully deleted API Key.'
     );
   }
 };

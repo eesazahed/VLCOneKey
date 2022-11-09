@@ -9,11 +9,11 @@ const {
   studentsCollection,
   guildsCollection,
   globals,
-} = require("../../index");
+} = require('../../index');
 
 module.exports = async function (interaction) {
   if (
-    interaction.memberPermissions.has("ADMINISTRATOR") ||
+    interaction.memberPermissions.has('ADMINISTRATOR') ||
     interaction.user.id == globals.yusufID
   ) {
     try {
@@ -29,8 +29,8 @@ module.exports = async function (interaction) {
     await globals.respond(
       interaction,
       false,
-      "❌ Insufficient Permissions",
-      "You must be a server administator to use setup commands."
+      '❌ Insufficient Permissions',
+      'You must be a server administator to use setup commands.'
     );
   }
 };

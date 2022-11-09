@@ -9,14 +9,14 @@ const {
   studentsCollection,
   guildsCollection,
   globals,
-} = require("../../../index");
+} = require('../../../index');
 
 module.exports = async function (interaction) {
   globals.respond(
     interaction,
     true,
-    "",
-    "✅ Resetting nicknames of all members..."
+    '',
+    '✅ Resetting nicknames of all members...'
   );
 
   await interaction.guild.members.cache.each(async (member) => {
@@ -25,7 +25,7 @@ module.exports = async function (interaction) {
       try {
         await member.setNickname(
           mongoStudent.name,
-          "✅ Verified with VLC OneKey."
+          '✅ Verified with VLC OneKey.'
         );
       } catch {
         // Can't change nickname
@@ -33,5 +33,5 @@ module.exports = async function (interaction) {
     }
   });
 
-  globals.guild(interaction.guild, "Server nameswept.");
+  globals.guild(interaction.guild, 'Server nameswept.');
 };

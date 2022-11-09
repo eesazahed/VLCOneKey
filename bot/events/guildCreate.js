@@ -9,8 +9,8 @@ const {
   studentsCollection,
   guildsCollection,
   globals,
-} = require("../../index");
+} = require('../../index');
 
 module.exports = async function (guild) {
-  globals.guild(guild, "VLC OneKey has been added.");
+  globals.guild(guild, 'VLC OneKey has been added.');
 };

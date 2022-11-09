@@ -9,7 +9,7 @@ const {
   studentsCollection,
   guildsCollection,
   globals,
-} = require("../../index");
+} = require('../../index');
 
 module.exports = async function (member) {
   let mongoStudent = await studentsCollection.findOne({ _id: member.id });
@@ -19,7 +19,7 @@ module.exports = async function (member) {
   // ======== Sets nickname ========
 
   try {
-    await member.setNickname(mongoStudent.name, "✅ Verified with VLC OneKey.");
+    await member.setNickname(mongoStudent.name, '✅ Verified with VLC OneKey.');
   } catch {
     // Cannot change nickname
   }
@@ -35,7 +35,7 @@ module.exports = async function (member) {
 
   try {
     let verifiedRole = await member.guild.roles.fetch(mongoGuild.verifiedRole);
-    await member.roles.add(verifiedRole, "✅ Verified with VLC OneKey.");
+    await member.roles.add(verifiedRole, '✅ Verified with VLC OneKey.');
   } catch (error) {
     globals.error(
       `Unable to add verified role to <@${member.user.id}> (\`${member.user.id}\`) in **${member.guild.name}**.\n\`\`\`\n${error}\n\`\`\``
@@ -51,7 +51,7 @@ module.exports = async function (member) {
           description: `You have been automatically verified in **${member.guild.name}**.`,
           footer: {
             iconURL: discordClient.user.displayAvatarURL(),
-            text: "VLC OneKey | Verified once, verified forever.",
+            text: 'VLC OneKey | Verified once, verified forever.',
           },
           color: 2201331,
         },
@@ -68,11 +68,11 @@ module.exports = async function (member) {
     member.send({
       embeds: [
         {
-          title: "Club Enrollment",
+          title: 'Club Enrollment',
           description: `Please enroll in the club's Canvas course if you have not already done so.`,
           footer: {
             iconURL: discordClient.user.displayAvatarURL(),
-            text: "VLC OneKey | Verified once, verified forever.",
+            text: 'VLC OneKey | Verified once, verified forever.',
           },
           color: 2201331,
         },
@@ -83,7 +83,7 @@ module.exports = async function (member) {
           components: [
             {
               type: 2,
-              label: "Enroll",
+              label: 'Enroll',
               style: 5,
               url: mongoGuild.enrollmentLink,
             },

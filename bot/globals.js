@@ -8,19 +8,19 @@ const {
   discordClient,
   studentsCollection,
   guildsCollection,
-} = require("../index");
+} = require('../index');
 
-const verifyLogsChannelID = "924353379302527016";
-const errorLogsChannelID = "953539238534713364";
-const guildLogsChannelID = "953539282591682560";
-const commLogsChannelID = "884681312445812746";
+const verifyLogsChannelID = '924353379302527016';
+const errorLogsChannelID = '953539238534713364';
+const guildLogsChannelID = '953539282591682560';
+const commLogsChannelID = '884681312445812746';
 
-const yusufID = "218065068875579393"; // Yusuf Rahmn
-const ibrahimID = "760542510975156285"; // Ibrahim Siddique
+const yusufID = '218065068875579393'; // Yusuf Rahmn
+const ibrahimID = '760542510975156285'; // Ibrahim Siddique
 
 const developers = [yusufID, ibrahimID];
 
-const respond = async function (interaction, success, title, description = "") {
+const respond = async function (interaction, success, title, description = '') {
   let color = 15548997;
   if (success) {
     color = 5763719;
@@ -33,7 +33,7 @@ const respond = async function (interaction, success, title, description = "") {
         description: description,
         footer: {
           iconURL: discordClient.user.displayAvatarURL(),
-          text: "VLC OneKey | Verified once, verified forever.",
+          text: 'VLC OneKey | Verified once, verified forever.',
         },
         color: color,
       },
@@ -46,7 +46,7 @@ const respondAgain = async function (
   interaction,
   success,
   title,
-  description = ""
+  description = ''
 ) {
   let color = 15548997;
   if (success) {
@@ -60,7 +60,7 @@ const respondAgain = async function (
         description: description,
         footer: {
           iconURL: discordClient.user.displayAvatarURL(),
-          text: "VLC OneKey | Verified once, verified forever.",
+          text: 'VLC OneKey | Verified once, verified forever.',
         },
         color: color,
       },
@@ -75,11 +75,11 @@ const warn = async function (description) {
   channel.send({
     embeds: [
       {
-        title: "⚠ Warning",
+        title: '⚠ Warning',
         description: description,
         footer: {
           iconURL: discordClient.user.displayAvatarURL(),
-          text: "VLC OneKey | Verified once, verified forever.",
+          text: 'VLC OneKey | Verified once, verified forever.',
         },
         color: 16705372,
       },
@@ -93,11 +93,11 @@ const error = async function (description) {
   channel.send({
     embeds: [
       {
-        title: "❌ Error",
+        title: '❌ Error',
         description: description,
         footer: {
           iconURL: discordClient.user.displayAvatarURL(),
-          text: "VLC OneKey | Verified once, verified forever.",
+          text: 'VLC OneKey | Verified once, verified forever.',
         },
         color: 15548997,
       },
@@ -118,7 +118,7 @@ const guild = async function (guild, description) {
         description: description,
         footer: {
           iconURL: discordClient.user.displayAvatarURL(),
-          text: "VLC OneKey | Verified once, verified forever.",
+          text: 'VLC OneKey | Verified once, verified forever.',
         },
         color: 2201331,
       },

@@ -9,7 +9,7 @@ const {
   studentsCollection,
   guildsCollection,
   globals,
-} = require("../../index");
+} = require('../../index');
 
 module.exports = async function (interaction) {
   if (
@@ -19,21 +19,21 @@ module.exports = async function (interaction) {
     return globals.respond(
       interaction,
       false,
-      "❌ Unauthorized",
-      "You must be an authorized OneKey developer to use this subcommand."
+      '❌ Unauthorized',
+      'You must be an authorized OneKey developer to use this subcommand.'
     );
 
   let mongoStudent = await studentsCollection.findOne({
-    _id: interaction.options.getString("id"),
+    _id: interaction.options.getString('id'),
   });
 
   if (!mongoStudent)
-    return globals.respond(interaction, false, "", "❌ Invalid user ID.");
+    return globals.respond(interaction, false, '', '❌ Invalid user ID.');
 
   await globals.respond(
     interaction,
     false,
-    "⚠️ Warning",
+    '⚠️ Warning',
     `Are you sure you want to unverify <@${mongoStudent._id}> (**${
       mongoStudent.name
     }** / \`${mongoStudent.email}\` / \`${
@@ -44,7 +44,7 @@ module.exports = async function (interaction) {
   );
 
   let filter = (m) =>
-    m.author.id == interaction.user.id && m.content === "Yes.";
+    m.author.id == interaction.user.id && m.content === 'Yes.';
   let confirmation = await interaction.channel.awaitMessages({
     filter,
     max: 4,
@@ -54,8 +54,8 @@ module.exports = async function (interaction) {
     return globals.respondAgain(
       interaction,
       false,
-      "",
-      "❌ Confirmation failed."
+      '',
+      '❌ Confirmation failed.'
     );
 
   try {
@@ -75,7 +75,7 @@ module.exports = async function (interaction) {
           );
           await member.roles.remove(
             verifiedRole,
-            "❌ Unverified with VLC OneKey."
+            '❌ Unverified with VLC OneKey.'
           );
         } catch (error) {
           globals.error(
@@ -85,10 +85,10 @@ module.exports = async function (interaction) {
 
         try {
           await member.setNickname(
-            "❌ Inactive Account",
-            "❌ Unverified with VLC OneKey."
+            '❌ Inactive Account',
+            '❌ Unverified with VLC OneKey.'
           );
-          await member.kick("❌ Unverified with VLC OneKey.");
+          await member.kick('❌ Unverified with VLC OneKey.');
         } catch {
           // Cannot set nickname/kick
         }
@@ -102,11 +102,11 @@ module.exports = async function (interaction) {
       await user.send({
         embeds: [
           {
-            title: "❌ Unverified",
+            title: '❌ Unverified',
             description: `Your account has been unverified..`,
             footer: {
               iconURL: discordClient.user.displayAvatarURL(),
-              text: "VLC OneKey | Verified once, verified forever.",
+              text: 'VLC OneKey | Verified once, verified forever.',
             },
             color: 15548997,
           },
@@ -124,11 +124,11 @@ module.exports = async function (interaction) {
     verifyLogsChannel.send({
       embeds: [
         {
-          title: "❌ Unverified",
+          title: '❌ Unverified',
           description: `<@${mongoStudent._id}> (**${mongoStudent.name}** / \`${mongoStudent.email}\` / \`${mongoStudent._id}\`) has been successfully unverified.`,
           footer: {
             iconURL: discordClient.user.displayAvatarURL(),
-            text: "VLC OneKey | Verified once, verified forever.",
+            text: 'VLC OneKey | Verified once, verified forever.',
           },
           color: 15548997,
         },
@@ -145,14 +145,14 @@ module.exports = async function (interaction) {
     globals.respondAgain(
       interaction,
       true,
-      "",
+      '',
       `✅ Successfully unverified <@${mongoStudent._id}> (**${mongoStudent.name}** / \`${mongoStudent.email}\` / \`${mongoStudent._id}\`).`
     );
   } catch (error) {
     globals.respondAgain(
       interaction,
       false,
-      "",
+      '',
       `❌ Unable to unverify user.\n\`\`\`\n${error}\n\`\`\``
     );
   }

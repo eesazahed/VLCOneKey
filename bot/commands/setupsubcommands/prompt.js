@@ -9,18 +9,18 @@ const {
   studentsCollection,
   guildsCollection,
   globals,
-} = require("../../../index");
+} = require('../../../index');
 
 module.exports = async function (interaction) {
   await interaction.channel.send({
     embeds: [
       {
-        title: "🔓 Verification",
+        title: '🔓 Verification',
         description:
-          "To gain full access to the server, please verify your identity as a VLC student by clicking `Verify` below. \n\nIf you encounter any issues, ping a server administator.",
+          'To gain full access to the server, please verify your identity as a VLC student by clicking `Verify` below. \n\nIf you encounter any issues, ping a server administator.',
         footer: {
           iconURL: discordClient.user.displayAvatarURL(),
-          text: "VLC OneKey | Verified once, verified forever.",
+          text: 'VLC OneKey | Verified once, verified forever.',
         },
         color: 2201331,
       },
@@ -31,9 +31,9 @@ module.exports = async function (interaction) {
         components: [
           {
             type: 2,
-            label: "Verify",
+            label: 'Verify',
             style: 5,
-            url: "http://vlconekey.com/",
+            url: 'http://vlconekey.com/',
           },
         ],
       },
@@ -42,8 +42,8 @@ module.exports = async function (interaction) {
   await globals.respond(
     interaction,
     true,
-    "",
-    "✅ Verification prompt created."
+    '',
+    '✅ Verification prompt created.'
   );
-  globals.guild(interaction.guild, "Verification prompt created.");
+  globals.guild(interaction.guild, 'Verification prompt created.');
 };

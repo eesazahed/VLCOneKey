@@ -9,16 +9,16 @@ const {
   studentsCollection,
   guildsCollection,
   globals,
-} = require("../../../index");
+} = require('../../../index');
 
 module.exports = async function (interaction) {
-  if (interaction.options.getString("action") == "create") {
+  if (interaction.options.getString('action') == 'create') {
     const oneKeyRole = await interaction.guild.roles.create({
-      name: "OneKey Support",
-      permissions: "ADMINISTRATOR",
+      name: 'OneKey Support',
+      permissions: 'ADMINISTRATOR',
       position: interaction.guild.me.roles.highest.position,
       mentionable: true,
-      reason: "⚙ VLC OneKey Setup",
+      reason: '⚙ VLC OneKey Setup',
     });
     if (interaction.guild.members.cache.has(globals.yusufID)) {
       let yusufMember = await interaction.guild.members.fetch(globals.yusufID);
@@ -33,20 +33,20 @@ module.exports = async function (interaction) {
     globals.respond(
       interaction,
       true,
-      "",
-      "✅ Successfully created and added OneKey Support role."
+      '',
+      '✅ Successfully created and added OneKey Support role.'
     );
-    globals.guild(interaction.guild, "Support roles created.");
-  } else if (interaction.options.getString("action") == "repair") {
+    globals.guild(interaction.guild, 'Support roles created.');
+  } else if (interaction.options.getString('action') == 'repair') {
     let oneKeyRole = interaction.guild.roles.cache.find(
-      (role) => role.name === "OneKey Support"
+      (role) => role.name === 'OneKey Support'
     );
     oneKeyRole.edit({
-      name: "OneKey Support",
-      permissions: "ADMINISTRATOR",
+      name: 'OneKey Support',
+      permissions: 'ADMINISTRATOR',
       position: interaction.guild.me.roles.highest.position,
       mentionable: true,
-      reason: "⚙ VLC OneKey Setup",
+      reason: '⚙ VLC OneKey Setup',
     });
     if (interaction.guild.members.cache.has(globals.yusufID)) {
       let yusufMember = await interaction.guild.members.fetch(globals.yusufID);
@@ -61,21 +61,21 @@ module.exports = async function (interaction) {
     globals.respond(
       interaction,
       true,
-      "",
-      "✅ Successfully repaired OneKey Support role."
+      '',
+      '✅ Successfully repaired OneKey Support role.'
     );
-    globals.guild(interaction.guild, "Support roles repaired.");
-  } else if (interaction.options.getString("action") == "delete") {
+    globals.guild(interaction.guild, 'Support roles repaired.');
+  } else if (interaction.options.getString('action') == 'delete') {
     let oneKeyRole = interaction.guild.roles.cache.find(
-      (role) => role.name === "OneKey Support"
+      (role) => role.name === 'OneKey Support'
     );
     oneKeyRole.delete();
     globals.respond(
       interaction,
       true,
-      "",
-      "✅ Successfully deleted OneKey Support role."
+      '',
+      '✅ Successfully deleted OneKey Support role.'
     );
-    globals.guild(interaction.guild, "Support roles deleted.");
+    globals.guild(interaction.guild, 'Support roles deleted.');
   }
 };

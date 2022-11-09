@@ -9,17 +9,17 @@ const {
   studentsCollection,
   guildsCollection,
   globals,
-} = require("../../../index");
+} = require('../../../index');
 
 module.exports = async function (interaction) {
   if (
-    interaction.options.get("verifiedrole").role.position >=
+    interaction.options.get('verifiedrole').role.position >=
     interaction.guild.me.roles.highest.position
   )
     return globals.respond(
       interaction,
       false,
-      ":x: Invalid Role",
+      ':x: Invalid Role',
       "VLC OneKey's highest role is below the verified role you have selected. Please move the `VLC OneKey` role to the top of the roles list in server settings."
     );
 
@@ -31,9 +31,9 @@ module.exports = async function (interaction) {
     guildsCollection.insertOne({
       _id: interaction.guild.id,
       name: interaction.guild.name,
-      verifiedRole: interaction.options.get("verifiedrole").role.id,
-      clubName: interaction.options.getString("clubname"),
-      enrollmentLink: interaction.options.getString("enrollmentlink"),
+      verifiedRole: interaction.options.get('verifiedrole').role.id,
+      clubName: interaction.options.getString('clubname'),
+      enrollmentLink: interaction.options.getString('enrollmentlink'),
     });
   } else {
     guildsCollection.updateOne(
@@ -41,13 +41,13 @@ module.exports = async function (interaction) {
       {
         $set: {
           name: interaction.guild.name,
-          verifiedRole: interaction.options.get("verifiedrole").role.id,
-          clubName: interaction.options.getString("clubname"),
-          enrollmentLink: interaction.options.getString("enrollmentlink"),
+          verifiedRole: interaction.options.get('verifiedrole').role.id,
+          clubName: interaction.options.getString('clubname'),
+          enrollmentLink: interaction.options.getString('enrollmentlink'),
         },
       }
     );
   }
-  globals.respond(interaction, true, "", "✅ Successfully initialized server.");
-  globals.guild(interaction.guild, "VLC OneKey initialized.");
+  globals.respond(interaction, true, '', '✅ Successfully initialized server.');
+  globals.guild(interaction.guild, 'VLC OneKey initialized.');
 };

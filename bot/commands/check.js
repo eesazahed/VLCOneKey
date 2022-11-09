@@ -9,7 +9,7 @@ const {
   studentsCollection,
   guildsCollection,
   globals,
-} = require("../../index");
+} = require('../../index');
 
 module.exports = async function (interaction) {
   const mongoStudent = await studentsCollection.findOne({
@@ -21,27 +21,27 @@ module.exports = async function (interaction) {
       await interaction.reply({
         embeds: [
           {
-            title: "✅ You are verified.",
+            title: '✅ You are verified.',
             fields: [
               {
-                name: "Name",
+                name: 'Name',
                 value: mongoStudent.name,
                 inline: true,
               },
               {
-                name: "Email",
+                name: 'Email',
                 value: mongoStudent.email,
                 inline: true,
               },
               {
-                name: "Date Verified",
+                name: 'Date Verified',
                 value: `<t:${Math.round(mongoStudent.timestamp / 1000)}:R>`,
                 inline: true,
               },
             ],
             footer: {
               iconURL: discordClient.user.displayAvatarURL(),
-              text: "VLC OneKey | Verified once, verified forever.",
+              text: 'VLC OneKey | Verified once, verified forever.',
             },
             color: 5763719,
           },
@@ -59,17 +59,17 @@ module.exports = async function (interaction) {
               title: `✅ ${interaction.options.data[0].user.tag} is verified.`,
               fields: [
                 {
-                  name: "Name",
+                  name: 'Name',
                   value: otherMongoStudent.name,
                   inline: true,
                 },
                 {
-                  name: "Email",
+                  name: 'Email',
                   value: otherMongoStudent.email,
                   inline: true,
                 },
                 {
-                  name: "Date Verified",
+                  name: 'Date Verified',
                   value: `<t:${Math.round(
                     otherMongoStudent.timestamp / 1000
                   )}:R>`,
@@ -78,7 +78,7 @@ module.exports = async function (interaction) {
               ],
               footer: {
                 iconURL: discordClient.user.displayAvatarURL(),
-                text: "VLC OneKey | Verified once, verified forever.",
+                text: 'VLC OneKey | Verified once, verified forever.',
               },
               color: 5763719,
             },
@@ -92,7 +92,7 @@ module.exports = async function (interaction) {
               title: `❌ ${interaction.options.data[0].user.tag} is not verified.`,
               footer: {
                 iconURL: discordClient.user.displayAvatarURL(),
-                text: "VLC OneKey | Verified once, verified forever.",
+                text: 'VLC OneKey | Verified once, verified forever.',
               },
               color: 15548997,
             },
@@ -108,10 +108,10 @@ module.exports = async function (interaction) {
           {
             title: `❌ You are not verified.`,
             description:
-              "Click `Verify` to verify your identity as a VLC student.",
+              'Click `Verify` to verify your identity as a VLC student.',
             footer: {
               iconURL: discordClient.user.displayAvatarURL(),
-              text: "VLC OneKey | Verified once, verified forever.",
+              text: 'VLC OneKey | Verified once, verified forever.',
             },
             color: 15548997,
           },
@@ -122,9 +122,9 @@ module.exports = async function (interaction) {
             components: [
               {
                 type: 2,
-                label: "Verify",
+                label: 'Verify',
                 style: 5,
-                url: "http://vlconekey.com/",
+                url: 'http://vlconekey.com/',
               },
             ],
           },
@@ -137,10 +137,10 @@ module.exports = async function (interaction) {
           {
             title: `❌ You must be verified to check the verification status of other users.`,
             description:
-              "Click `Verify` to verify your identity as a VLC student.",
+              'Click `Verify` to verify your identity as a VLC student.',
             footer: {
               iconURL: discordClient.user.displayAvatarURL(),
-              text: "VLC OneKey | Verified once, verified forever.",
+              text: 'VLC OneKey | Verified once, verified forever.',
             },
             color: 15548997,
           },
@@ -151,9 +151,9 @@ module.exports = async function (interaction) {
             components: [
               {
                 type: 2,
-                label: "Verify",
+                label: 'Verify',
                 style: 5,
-                url: "http://vlconekey.com/",
+                url: 'http://vlconekey.com/',
               },
             ],
           },

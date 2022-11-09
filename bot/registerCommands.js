@@ -1,33 +1,33 @@
-const { Client, Intents } = require("discord.js");
+const { Client, Intents } = require('discord.js');
 const client = new Client({ intents: 32727 });
 
 const commands = [
   {
-    name: "api",
-    description: "Modify Developer API keys",
+    name: 'api',
+    description: 'Modify Developer API keys',
     options: [
       {
         type: 1,
-        name: "create",
-        description: "Create an API key",
+        name: 'create',
+        description: 'Create an API key',
         options: [
           {
             type: 6,
-            name: "student",
-            description: "Student must be verified with VLC OneKey.",
+            name: 'student',
+            description: 'Student must be verified with VLC OneKey.',
             required: true,
           },
         ],
       },
       {
         type: 1,
-        name: "delete",
+        name: 'delete',
         description: "Delete a student's API key",
         options: [
           {
             type: 6,
-            name: "student",
-            description: "Student must previously have an API key.",
+            name: 'student',
+            description: 'Student must previously have an API key.',
             required: true,
           },
         ],
@@ -36,7 +36,7 @@ const commands = [
   },
 ];
 
-client.on("ready", async () => {
+client.on('ready', async () => {
   console.log(`Logged in as ${client.user.tag}.`);
 
   for (let command of commands) {
@@ -47,4 +47,4 @@ client.on("ready", async () => {
   client.destroy(); // end script
 });
 
-client.login(process.env["TOKEN"]);
+client.login(process.env['TOKEN']);

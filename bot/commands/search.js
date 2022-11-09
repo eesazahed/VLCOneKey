@@ -4,7 +4,7 @@
  *  The VLC name, logo, and all other branding are property of the Virtual Learning Center.
  *--------------------------------------------------------------------------------------------*/
 
-const { discordClient, studentsCollection } = require("../../index");
+const { discordClient, studentsCollection } = require('../../index');
 
 module.exports = async function (interaction) {
   const query = await studentsCollection
@@ -14,11 +14,11 @@ module.exports = async function (interaction) {
       },
     })
     .limit(
-      interaction.options.data[0].value.includes("@virtuallearning.ca") ? 1 : 5
+      interaction.options.data[0].value.includes('@virtuallearning.ca') ? 1 : 5
     )
     .sort({
       score: {
-        $meta: "textScore",
+        $meta: 'textScore',
       },
     });
 
@@ -35,19 +35,19 @@ module.exports = async function (interaction) {
 
   const embed = {
     title: `Your search returned ${fields.length} result${
-      fields.length != 1 ? "s" : ""
+      fields.length != 1 ? 's' : ''
     }.`,
     fields: fields,
     footer: {
       iconURL: discordClient.user.displayAvatarURL(),
-      text: "VLC OneKey | Verified once, verified forever.",
+      text: 'VLC OneKey | Verified once, verified forever.',
     },
     color: 5763719,
   };
 
   if (!fields.length) {
     // no students found
-    embed.description = "Please refine your search term.";
+    embed.description = 'Please refine your search term.';
     embed.color = 15548997;
   }
 

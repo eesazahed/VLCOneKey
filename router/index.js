@@ -4,20 +4,20 @@
  *  The VLC name, logo, and all other branding are property of the Virtual Learning Center.
  *--------------------------------------------------------------------------------------------*/
 
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
-router.use(require("./redirects"));
-router.use("/api", require("./api.v0"));
+router.use(require('./redirects'));
+router.use('/api', require('./api.v0'));
 
-const { statesCollection, studentsCollection, globals } = require("../index");
-const userVerify = require("../bot/events/userVerify");
-const { OAuth2Client } = require("google-auth-library");
-const googleClient = new OAuth2Client(process.env["GOOGLE_SECRET"]);
-const fetch = require("node-fetch");
+const { statesCollection, studentsCollection, globals } = require('../index');
+const userVerify = require('../bot/events/userVerify');
+const { OAuth2Client } = require('google-auth-library');
+const googleClient = new OAuth2Client(process.env['GOOGLE_SECRET']);
+const fetch = require('node-fetch');
 
 // index & Discord sign in
-router.get("/", async (req, res) => {
+router.get('/', async (req, res) => {
   let error, verified;
 
   // if discord oauth code
@@ -26,20 +26,20 @@ router.get("/", async (req, res) => {
 
     // verify state
     if (!state) {
-      error = "Missing or invalid state";
+      error = 'Missing or invalid state';
     } else {
       // get oauth token from discord using code
-      let response = await fetch("https://discord.com/api/oauth2/token", {
-        method: "POST",
+      let response = await fetch('https://discord.com/api/oauth2/token', {
+        method: 'POST',
         body: new URLSearchParams({
-          client_id: "919271957051105311",
-          client_secret: process.env["DISCORD_SECRET"],
-          grant_type: "authorization_code",
+          client_id: '919271957051105311',
+          client_secret: process.env['DISCORD_SECRET'],
+          grant_type: 'authorization_code',
           code: req.query.code,
-          redirect_uri: "https://vlconekey.com",
+          redirect_uri: 'https://vlconekey.com',
         }).toString(),
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
       });
 
@@ -47,10 +47,10 @@ router.get("/", async (req, res) => {
       let data = await response.json();
       if (response.status !== 200) {
         console.log(data);
-        error = "Invalid Discord OAuth token";
+        error = 'Invalid Discord OAuth token';
       } else {
         // fetch discord ID from api
-        response = await fetch("https://discord.com/api/users/@me", {
+        response = await fetch('https://discord.com/api/users/@me', {
           headers: {
             Authorization: `Bearer ${data.access_token}`,
           },
@@ -91,33 +91,33 @@ router.get("/", async (req, res) => {
     }
   }
 
-  res.render("index", {
+  res.render('index', {
     discordCompleted: verified,
     error: error,
-    googleSecret: process.env["GOOGLE_SECRET"],
+    googleSecret: process.env['GOOGLE_SECRET'],
   });
 });
 
 // Google Sign In
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
   // if missing ID token
   if (!req.body.token) {
     res.statusCode = 405;
-    return res.send("Missing token");
+    return res.send('Missing token');
   }
 
   // verify legitimacy of ID token
   const ticket = await googleClient.verifyIdToken({
     idToken: req.body.token,
-    audience: process.env["GOOGLE_SECRET"],
+    audience: process.env['GOOGLE_SECRET'],
   });
 
   // get user payload
   const payload = ticket.getPayload();
-  if (payload.hd !== "virtuallearning.ca") {
+  if (payload.hd !== 'virtuallearning.ca') {
     res.statusCode = 405;
     return res.send(
-      "You must sign in with your VLC (@virtuallearning.ca) account."
+      'You must sign in with your VLC (@virtuallearning.ca) account.'
     );
   }
 
@@ -131,13 +131,13 @@ router.post("/", async (req, res) => {
       `https://discord.com/api/v9/users/${emailInDB._id}`,
       {
         headers: {
-          Authorization: `Bot ${process.env["DISCORD_TOKEN"]}`,
+          Authorization: `Bot ${process.env['DISCORD_TOKEN']}`,
         },
       }
     );
 
     if (response.status != 200) {
-      exec("kill 1");
+      exec('kill 1');
       res.sendStatus(500);
     }
 
@@ -164,8 +164,8 @@ router.post("/", async (req, res) => {
   );
 });
 
-router.get("*", (req, res) => {
-  res.render("404");
+router.get('*', (req, res) => {
+  res.render('404');
 });
 
 module.exports = router;
