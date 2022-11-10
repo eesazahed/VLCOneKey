@@ -134,6 +134,12 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(require('./router'));
 
-app.listen(8080, () => {
-  console.log('✅ OneKey online: https://vlconekey.com');
-});
+app.listen(
+  {
+    host: process.env.APP_DOMAIN,
+    port: process.env.APP_PORT,
+  },
+  () => {
+    console.log(`✅ OneKey online: https://${process.env.APP_DOMAIN}`);
+  }
+);
